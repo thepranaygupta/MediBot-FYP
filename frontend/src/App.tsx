@@ -6,6 +6,8 @@ import { cloudinaryConfig } from './config/cloudinary';
 function App() {
   const backendURL = 'http://localhost:8000';
   const [image, setImage] = useState<File | null>(null);
+  const [showPrediction, setShowPrediction] = useState<boolean>(false);
+  const [isTumour, setIsTumour] = useState<boolean>(false);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     // store the image path in state
@@ -17,20 +19,17 @@ function App() {
 
   async function handleSubmit() {
     try {
-      toast.loading('Uploading Image...');
       const formData = new FormData();
       formData.append('file', image!);
       formData.append('upload_preset', cloudinaryConfig.uploadPreset);
       let data = '';
+      const toastId = toast.loading('Predicting Tumour...');
       await fetch(cloudinaryConfig.uploadURL, {
         method: 'POST',
         body: formData,
       })
         .then((res) => res.json())
         .then((res) => {
-          toast.dismiss();
-          toast.success('Image Uploaded!');
-          toast.loading('Predicting Tumour...');
           data = res.secure_url;
           console.log(data, 'uploaded to cloudinary');
 
@@ -42,38 +41,53 @@ function App() {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              toast.dismiss(toastId);
               toast.success('Prediction Successful!');
+              console.log(data);
+              setIsTumour(data.prediction[0] === 1);
+              setShowPrediction(true);
             })
             .catch((err) => {
+              toast.error('Something went wrong!');
               console.log(err);
-              alert('Something went wrong!');
-            })
-            .finally(() => {
-              toast.dismiss();
             });
         })
         .catch((err) => {
+          toast.error('Something went wrong!');
           console.log(err);
-          alert('Something went wrong!');
         });
     } catch (err) {
       toast.error('Something went wrong!');
       console.log(err);
-    } finally {
-      toast.dismiss();
-      setImage(null);
     }
   }
 
   return (
     <>
-      <main className='flex flex-col items-center justify-center min-h-screen space-y-20 my-6 max-w-[1200px] mx-auto'>
-        <img
-          className='w-[250px] h-auto'
-          src={image ? URL.createObjectURL(image) : 'https://via.placeholder.com/600x600'}
-          alt='preview'
-        />
+      <main className='flex flex-col items-center justify-center min-h-screen space-y-10 my-6 max-w-[1200px] mx-auto'>
+        {image ? (
+          <div className='flex flex-col items-center justify-center gap-4'>
+            <h1 className='text-2xl font-bold'>Selected Image</h1>
+            <img
+              className='object-contain w-[250px] h-[250px] rounded-xl'
+              src={URL.createObjectURL(image)}
+              alt='Selected Image'
+            />
+          </div>
+        ) : (
+          <div
+            className='flex flex-col items-center justify-center space-y-4 w-1/2 text-center border-2 border-gray-300 rounded-xl p-4 border-dashed'
+            onClick={() => {
+              if (typeof window === 'undefined') return;
+              const el = document.getElementById('selectImage');
+              if (el) el.click();
+            }}>
+            <h1 className='text-4xl font-bold'>Brain Tumour Detection</h1>
+            <p className='text-xl font-semibold'>
+              Upload an MRI scan of a brain and the model will predict whether a tumour is present or not.
+            </p>
+          </div>
+        )}
         <div className='flex flex-col w-1/3 gap-4 items-center'>
           <Button
             className='w-2/3'
@@ -100,6 +114,21 @@ function App() {
             </div>
           ) : null}
         </div>
+
+        {showPrediction ? (
+          <div>
+            {image ? (
+              <div className='flex flex-col items-center justify-center'>
+                <h1 className='text-2xl font-bold'>Prediction</h1>
+                <p
+                  className={`text-xl font-semibold
+              ${isTumour ? 'text-red-500' : 'text-green-500'}`}>
+                  {isTumour ? 'Tumour Detected' : 'No Tumour Detected'}
+                </p>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
       </main>
       <Toaster />
     </>
