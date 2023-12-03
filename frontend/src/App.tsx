@@ -5,11 +5,7 @@ import { cloudinaryConfig } from './config/cloudinary';
 
 function App() {
   const backendURL = 'http://localhost:8000';
-<<<<<<< HEAD
-  const [image, setImage] = useState<string | null>(null);
-=======
   const [image, setImage] = useState<File | null>(null);
->>>>>>> cf89656e2ab70973ab3f28dca27dac83f2c45a85
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     // store the image path in state
@@ -19,12 +15,7 @@ function App() {
     }
   }
 
-<<<<<<< HEAD
-  function handleSubmit() {
-    console.log(image)
-=======
   async function handleSubmit() {
->>>>>>> cf89656e2ab70973ab3f28dca27dac83f2c45a85
     try {
       toast.loading('Uploading Image...');
       const formData = new FormData();
