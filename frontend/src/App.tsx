@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from './components/ui/button';
 
 function App() {
-  const backendURL = process.env.VITE_BACKEND_URL || 'http://localhost:3000';
+  const backendURL = 'http://localhost:8000';
   const [image, setImage] = useState<string | null>(null);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -20,6 +20,7 @@ function App() {
   }
 
   function handleSubmit() {
+    console.log(image)
     try {
       fetch(`${backendURL}/predict_tumour`, {
         method: 'POST',

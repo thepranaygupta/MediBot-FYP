@@ -2,6 +2,8 @@ import logging
 import os
 import pickle
 import cv2
+import urllib.request
+import numpy as np
 
 from fastapi import APIRouter
 
@@ -19,10 +21,15 @@ async def predict():
     with open(my_file, "rb") as f:
         model = pickle.load(f)
 
-    # Pass the image.
-    img = cv2.imread(
-        'C:/Users/kkous/Desktop/brain-tumor-detection/brain_tumor/Testing/pituitary_tumor/image.jpg', 0)
-    img1 = cv2.resize(img, (200, 200))
+    req = urllib.request.urlopen(
+        'https://s3.ap-south-1.amazonaws.com/www.propeers.in/image(94).jpg')
+
+    print(req)
+
+    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+    img0 = cv2.imdecode(arr, 0)
+
+    img1 = cv2.resize(img0, (200, 200))
     img1 = img1.reshape(1, -1)/255
 
     prediction = model.predict(img1)
