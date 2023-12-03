@@ -34,12 +34,11 @@ function App() {
           data = res.secure_url;
           console.log(data, 'uploaded to cloudinary');
 
-          fetch(`${backendURL}/predict_tumour`, {
+          fetch(`${backendURL}/predict_tumour?img=${data}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ url: data }),
           })
             .then((res) => res.json())
             .then((data) => {
