@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from './components/ui/button';
 
 function App() {
   const backendURL = process.env.VITE_BACKEND_URL || 'http://localhost:3000';
@@ -45,20 +46,34 @@ function App() {
   }
 
   return (
-    <main className='flex flex-col items-center justify-center min-h-screen space-y-20'>
-      <div className='flex flex-row gap-4 mt-6'>
-        <input type='file' accept='image/png, image/jpeg' onChange={handleFileChange} className='' />
-        <button
-          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-          onClick={() => setImage(null)}>
-          Clear
-        </button>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleSubmit}>
-          Submit
-        </button>
-      </div>
-
+    <main className='flex flex-col items-center justify-center min-h-screen space-y-20 my-6 max-w-[1200px] mx-auto'>
       <img className='w-[250px] h-auto' src={image || 'https://via.placeholder.com/600x600'} alt='preview' />
+      <div className='flex flex-col w-1/3 gap-4 items-center'>
+        <Button
+        className='w-2/3'
+          onClick={() => {
+            if (typeof window === 'undefined') return;
+            const el = document.getElementById('selectImage');
+            if (el) el.click();
+          }}>
+          {image ? 'Change Image' : 'Select Image'}
+        </Button>
+        <input
+          name='image'
+          id='selectImage'
+          type='file'
+          accept='image/png, image/jpeg'
+          onChange={handleFileChange}
+          hidden
+        />
+
+        {image ? (
+          <div className='flex justify-center flex-row gap-4'>
+            <Button onClick={() => setImage(null)}>Clear</Button>
+            <Button onClick={handleSubmit}>Submit</Button>{' '}
+          </div>
+        ) : null}
+      </div>
     </main>
   );
 }
