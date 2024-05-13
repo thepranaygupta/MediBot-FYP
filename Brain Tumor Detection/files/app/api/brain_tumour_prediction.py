@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 @router.post('/predict_tumour')
-async def predict():
+async def predict(img):
 
     THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
     my_file = os.path.join(THIS_FOLDER, 'brain_tumour_pickle.pkl')
@@ -21,8 +21,7 @@ async def predict():
     with open(my_file, "rb") as f:
         model = pickle.load(f)
 
-    req = urllib.request.urlopen(
-        'https://s3.ap-south-1.amazonaws.com/www.propeers.in/image(94).jpg')
+    req = urllib.request.urlopen(img)
 
     print(req)
 

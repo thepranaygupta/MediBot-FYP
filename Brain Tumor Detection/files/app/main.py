@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from files.app.api import brain_tumour_prediction
+from .api import brain_tumour_prediction
 
 app = FastAPI(
     title='Brain Tumor Detection',
