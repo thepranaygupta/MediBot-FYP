@@ -22,7 +22,7 @@ async def recommend(req):
     query = req.strip().lower()  # Convert the single symptom to a list
     query = query.split()
     print("query", query)
-    df_to_pickle, recommend_medicines_by_symptoms_to_pickle, print_data_to_pickle, predict_med_to_pickle = model.values()
+
     recommended_medicines = model.predict_med(query)
     print(recommended_medicines)
     return {
