@@ -2,16 +2,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from .api import brain_tumour_prediction
+from .api import brain_tumour_prediction, medicine_recommendation
 
 app = FastAPI(
-    title='Brain Tumor Detection',
-    description='Final Year Project',
-    version='0.1',
+    title='MediBot',
+    description='A medical assistant',
+    version='0.2',
     docs_url='/',
 )
 
 app.include_router(brain_tumour_prediction.router)
+app.include_router(medicine_recommendation.router)
 
 app.add_middleware(
     CORSMiddleware,
