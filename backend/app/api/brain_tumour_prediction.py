@@ -7,10 +7,8 @@ import numpy as np
 
 from fastapi import APIRouter
 
-
 log = logging.getLogger(__name__)
 router = APIRouter()
-
 
 @router.post('/predict_tumour')
 async def predict(img):
