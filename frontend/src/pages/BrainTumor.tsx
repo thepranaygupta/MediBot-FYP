@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../components/ui/button';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { cloudinaryConfig } from '../config/cloudinary';
 import React from 'react';
 
@@ -130,7 +130,6 @@ export default function BrainTumor() {
           </div>
         ) : null}
       </main>
-      <Toaster />
     </>
   );
 }
