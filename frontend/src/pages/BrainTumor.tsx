@@ -64,7 +64,7 @@ export default function BrainTumor() {
   }
   return (
     <>
-      <main className='flex flex-col items-center justify-center min-h-screen space-y-10 my-6 max-w-[1200px] mx-auto'>
+      <main className='flex flex-col items-center justify-center min-h-[80vh] space-y-10 my-6 max-w-[1200px] mx-auto'>
         {image ? (
           <div className='flex flex-col items-center justify-center gap-4'>
             <h1 className='text-2xl font-bold'>Selected Image</h1>
