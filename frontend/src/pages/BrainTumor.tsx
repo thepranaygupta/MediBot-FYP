@@ -5,7 +5,7 @@ import { cloudinaryConfig } from '../config/cloudinary';
 import React from 'react';
 
 export default function BrainTumor() {
-  const backendURL = process.env.VITE_BACKEND_URL;
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
   const [image, setImage] = useState<File | null>(null);
   const [showPrediction, setShowPrediction] = useState<boolean>(false);
   const [isTumour, setIsTumour] = useState<boolean>(false);
