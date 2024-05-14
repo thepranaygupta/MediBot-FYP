@@ -10,11 +10,13 @@ function App() {
     <Router>
       <div>
         <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/brain-tumor-detection' element={<BrainTumor />}></Route>
-          <Route path='/medicine-recommendation' element={<MedicineRecommendation />}></Route>
-        </Routes>
+        <div className='mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8'>
+          <Routes>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/brain-tumor-detection' element={<BrainTumor />}></Route>
+            <Route path='/medicine-recommendation' element={<MedicineRecommendation />}></Route>
+          </Routes>
+        </div>
 
         <Toaster />
       </div>
