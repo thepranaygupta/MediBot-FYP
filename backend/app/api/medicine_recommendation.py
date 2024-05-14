@@ -11,8 +11,7 @@ import json
 # ---------------------------------------------------------------------------
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-df = pd.read_csv(
-    'F:\\MediBot-FYP\\backend\\Medicine Recommender\\Dataset\\Medicine_Details.csv')
+df = pd.read_csv(THIS_FOLDER + '/Medicine_Details.csv')
 
 
 my_file1 = os.path.join(THIS_FOLDER, 'cosine_sim_combined.pkl')
