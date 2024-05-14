@@ -8,12 +8,12 @@ const menuItems = [
     href: '/',
   },
   {
-    name: 'Brain Tumor Detection',
-    href: '/brain-tumor-detection',
-  },
-  {
     name: 'Medicine Recommendation',
     href: '/medicine-recommendation',
+  },
+  {
+    name: 'Brain Tumor Detection',
+    href: '/brain-tumor-detection',
   },
 ];
 
