@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Home() {
   return (
     <div className='bg-white py-6 sm:py-8 lg:py-12'>
@@ -13,8 +15,8 @@ export default function Home() {
         </div>
 
         <div className='grid gap-6 sm:grid-cols-2'>
-          <a
-            href='/medicine-recommendation'
+          <Link
+            to='/medicine-recommendation'
             className='group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg'>
             <img
               src='https://images.pexels.com/photos/208512/pexels-photo-208512.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
@@ -26,10 +28,10 @@ export default function Home() {
             <div className='relative flex flex-col'>
               <span className='text-lg font-semibold text-white lg:text-xl'>Medicine Recommendation</span>
             </div>
-          </a>
+          </Link>
 
-          <a
-            href='/brain-tumor-detection'
+          <Link
+            to='/brain-tumor-detection'
             className='group relative flex h-80 items-end overflow-hidden rounded-lg bg-gray-100 p-4 shadow-lg'>
             <img
               src='https://images.pexels.com/photos/4226123/pexels-photo-4226123.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
@@ -41,7 +43,7 @@ export default function Home() {
             <div className='relative flex flex-col'>
               <span className='text-lg font-semibold text-white lg:text-xl'>Brain Tumor Detection</span>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
